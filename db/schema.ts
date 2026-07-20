@@ -41,3 +41,7 @@ export const notificationOutbox = sqliteTable("notification_outbox", {
   uniqueIndex("notification_outbox_dedupe_unique").on(table.subscriptionId, table.dedupeKey),
   index("notification_outbox_delivery_idx").on(table.status, table.availableAt),
 ]);
+
+export const savedPlans = sqliteTable("saved_plans", {
+  id: integer("id").primaryKey({ autoIncrement: true }), email: text("email").notNull(), purpose: text("purpose").notNull(), pace: text("pace").notNull(), budget: text("budget").notNull(), itemsJson: text("items_json").notNull(), checkedJson: text("checked_json").notNull(), consent: integer("consent", { mode: "boolean" }).notNull(), createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+}, table => [index("saved_plans_email_idx").on(table.email, table.createdAt)]);
