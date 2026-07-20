@@ -96,3 +96,9 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 
 - [vinext Documentation](https://github.com/cloudflare/vinext)
 - [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+
+## Notification delivery
+
+Alert subscriptions are stored in D1. When `NOTIFICATION_ENCRYPTION_KEY` is configured, new email destinations are encrypted with AES-256-GCM; only a hash and masked value are otherwise retained. Internal event producers call `POST /api/notifications/enqueue`, and a trusted scheduler calls `POST /api/notifications/deliver`. Both endpoints require `Authorization: Bearer <NOTIFICATION_INTERNAL_TOKEN>`.
+
+Delivery fails closed until all values in `.env.example` are configured. Resend requests use the outbox job id as the idempotency key, and failed jobs retry after five minutes up to five attempts. Web Push subscriptions remain stored but are not sent until browser PushSubscription support is added.

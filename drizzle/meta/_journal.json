@@ -8,6 +8,13 @@
       "when": 1784533182645,
       "tag": "0000_peaceful_mad_thinker",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1784533679608,
+      "tag": "0001_tiresome_prowler",
+      "breakpoints": true
     }
   ]
 }
